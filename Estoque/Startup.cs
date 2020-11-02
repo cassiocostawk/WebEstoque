@@ -5,8 +5,14 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using EstoqueWeb.DAL;
+using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
-namespace Estoque {
+namespace EstoqueWeb {
     public class Startup {
         public Startup(IConfiguration configuration) {
             Configuration = configuration;
@@ -17,12 +23,35 @@ namespace Estoque {
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
 
+            services.AddDbContext<EstoqueDBContext>(options=>options.UseSqlite(Configuration.GetConnectionString("SqliteConnectionString")));
             services.AddControllersWithViews();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration => {
                 configuration.RootPath = "ClientApp/build";
             });
+
+            services.AddSwaggerGen();
+
+            #region JWT Autentication Config
+            var secretKey = "ZWRpw6fDo28gZW0gY29tcHV0YWRvcmE=";
+
+            services.AddAuthentication(x => {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x => {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey)),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,6 +67,12 @@ namespace Estoque {
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(options => {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1");
+                //options.RoutePrefix = string.Empty;
+            });
 
             app.UseRouting();
 

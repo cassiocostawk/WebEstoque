@@ -1,6 +1,6 @@
 using System;
 
-namespace Estoque {
+namespace EstoqueWeb {
     public class WeatherForecast {
         public DateTime Date { get; set; }
 
