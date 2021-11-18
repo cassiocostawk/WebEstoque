@@ -91,7 +91,7 @@ export class AddEstoque extends Component {
                 <div className="form-group row">
                     <label className="control-label col-md-12"htmlFor="ValorUnitario">Valor Unitário</label>
                     <div className="col-md-4">
-                        <input name="valorUnitario" step=".01" defaultValue={this.state.estoque.valorUnitario} className="form-control" required />
+                        <input name="valorUnitario" defaultValue={this.state.estoque.valorUnitario} className="form-control" required />
                     </div>
                 </div>
                 <div className="form-group">

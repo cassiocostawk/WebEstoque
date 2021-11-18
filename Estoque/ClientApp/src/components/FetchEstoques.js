@@ -25,7 +25,9 @@ export class FetchEstoques extends Component {
         return (
             <div>
                 <p>
-                    <Link to="/addestoque">Inserir um Produto ao Estoque</Link>
+                    <Link to="/addestoque">
+                        <button className="btn btn-success btn-sm" to="/addestoque">Inserir um Produto ao Estoque</button>
+                    </Link>
                 </p>
                 {contents}
             </div>
@@ -54,8 +56,8 @@ export class FetchEstoques extends Component {
                             <td>{estoque.quantidade}</td>
                             <td>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(estoque.valorUnitario)}</td>
                             <td>
-                                <button className="btn btn-success" onClick={(Id) => this.handleEdit(estoque.id)}>Editar</button>&nbsp;
-                                <button className="btn btn-danger" onClick={(Id) => this.handleDelete(estoque.id)}>Remover</button>&nbsp;
+                                <button className="btn btn-success btn-sm" onClick={(Id) => this.handleEdit(estoque.id)}>Editar</button>&nbsp;
+                                <button className="btn btn-danger btn-sm" onClick={(Id) => this.handleDelete(estoque.id)}>Remover</button>&nbsp;
                             </td>
                         </tr>    
                     )}                       
