@@ -26,7 +26,7 @@ export class FetchEstoques extends Component {
             <div>
                 <p>
                     <Link to="/addestoque">
-                        <button className="btn btn-success btn-sm" to="/addestoque">Inserir um Produto ao Estoque</button>
+                        <button className="btn btn-success btn-sm">Inserir um Produto ao Estoque</button>
                     </Link>
                 </p>
                 {contents}
@@ -68,7 +68,7 @@ export class FetchEstoques extends Component {
     }
 
     handleEdit(id) {
-        this.props.history.push("/estoques/edit/" + id);
+        this.props.history.push("/estoque/edit/" + id);
     }
 
     handleDelete(id) {

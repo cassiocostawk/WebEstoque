@@ -15,7 +15,7 @@ export default class App extends Component {
             <Route exact path='/' component={FetchEstoques} />
             <Route path='/fetch-estoques' component={FetchEstoques} />
             <Route path='/addestoque' component={AddEstoque} />
-            <Route path='/estoque/edit/:Id' component={AddEstoque} />
+            <Route path='/estoque/edit/:id' component={AddEstoque} />
       </Layout>
     );
   }

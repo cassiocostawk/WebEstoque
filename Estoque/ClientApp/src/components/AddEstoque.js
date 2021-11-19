@@ -49,18 +49,18 @@ export class AddEstoque extends Component {
         );
     }
 
-    handleSave(event) {
+    async handleSave(event) {
         event.preventDefault();
 
         const data = new FormData(event.target);
 
         if (this.state.estoque.id) {
-            var response1 = fetch('api/tbestoques/' + this.state.estoque.id, { method: 'PUT', body: data });
-            this.props.history.push("/fetch-estoques");
+            var response1 = await fetch('api/tbestoques/' + this.state.estoque.id, { method: 'PUT', body: data });
+            this.props.history.push("/");
         }
         else {
-            var response2 = fetch('api/tbestoques', { method: 'POST', body: data });
-            this.props.history.push("/fetch-estoques");
+            var response2 = await fetch('api/tbestoques', { method: 'POST', body: data });
+            this.props.history.push("/");
         }
     }
 
@@ -91,7 +91,7 @@ export class AddEstoque extends Component {
                 <div className="form-group row">
                     <label className="control-label col-md-12"htmlFor="ValorUnitario">Valor Unitário</label>
                     <div className="col-md-4">
-                        <input name="valorUnitario" defaultValue={this.state.estoque.valorUnitario} className="form-control" required />
+                        <input name="valorUnitario" type="numeric" defaultValue={this.state.estoque.valorUnitario.toLocaleString('pt-BR')} className="form-control" required />
                     </div>
                 </div>
                 <div className="form-group">
