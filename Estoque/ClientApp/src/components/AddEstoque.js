@@ -30,7 +30,7 @@ export class AddEstoque extends Component {
             this.setState({ title: "Alterar", estoque: data, loading: false });
         }
         else {
-            this.state = { title: "Cadastro", estoque: new Estoque, loading: false };
+            this.state = { title: "Inserir", estoque: new Estoque, loading: false };
         }
 
     }
@@ -41,10 +41,8 @@ export class AddEstoque extends Component {
             : this.renderCreateForm();
         return (
             < div >
-            <h1>{this.state.title}</h1>
-            <h3>Estoque</h3>
-            <hr />
-                { contents }
+                <h3 class="alert alert-light">{this.state.title}</h3>
+                {contents}
             </div >
         );
     }
@@ -68,7 +66,7 @@ export class AddEstoque extends Component {
         event.preventDefault();
         this.props.history.push("/fetch-estoques");
     }
-    
+
 
     renderCreateForm() {
         return (
@@ -80,7 +78,7 @@ export class AddEstoque extends Component {
                     <label className="control-label col-md-12" htmlFor="NomeProduto">Nome do Produto</label>
                     <div className="col-md-4">
                         <input type="text" name="nomeProduto" defaultValue={this.state.estoque.nomeProduto} className="form-control" required />
-                    </div>                        
+                    </div>
                 </div>
                 <div className="form-group row">
                     <label className="control-label col-md-12" htmlFor="Quantidade">Quantidade</label>
@@ -89,13 +87,13 @@ export class AddEstoque extends Component {
                     </div>
                 </div>
                 <div className="form-group row">
-                    <label className="control-label col-md-12"htmlFor="ValorUnitario">Valor Unitário</label>
+                    <label className="control-label col-md-12" htmlFor="ValorUnitario">Valor Unitário</label>
                     <div className="col-md-4">
                         <input name="valorUnitario" type="numeric" defaultValue={this.state.estoque.valorUnitario.toLocaleString('pt-BR')} className="form-control" required />
                     </div>
                 </div>
                 <div className="form-group">
-                    <button type="submit" className="btn btn-success">Salvar</button>
+                    <button type="submit" className="btn btn-success">Salvar</button>&nbsp;
                     <button className="btn btn-danger" onClick={this.handleCancel}>Cancelar</button>
                 </div>
             </form>
